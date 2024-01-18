@@ -4,6 +4,9 @@ export function init() {
     const doc = document; 
     const principalContent = doc.getElementById('main'); 
 
-    
+
 }
 
+function getLoggins() {
+    
+}
