@@ -1,8 +1,13 @@
+/* import getCatalogue */
+import getCategories from './../templates/catalogo.template'
 
 function init() { 
     console.log('HOLA')
     const doc = document; 
-    const principalContent = doc.getElementById('main'); 
+
+    getCategories();
+
+    console.log(catalogo); 
 }
 
 function getLoggins() {
