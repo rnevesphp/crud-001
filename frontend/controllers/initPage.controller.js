@@ -5,7 +5,7 @@ function init() {
     console.log('HOLA')
     const doc = document; 
 
-    getCategories();
+    new getCategories(); 
 
     console.log(catalogo); 
 }

@@ -1,6 +1,8 @@
 const express = require('express');
 const Router = express.Router();
 
+const  catalogo  = require('../source/data');
+
 const listaDeTarefas = [
     { id: crypto.randomUUID(), nome: "Ler livro de Javascript", prazo: "5 dias" },
     { id: crypto.randomUUID(), nome: "Fazer o curso de API's", prazo: "30 dias" },
@@ -9,7 +11,7 @@ const listaDeTarefas = [
 
 // obtem as tarefas = select
 Router.get('/', (req, res) => {
-    res.send(listaDeTarefas);
+    res.send(catalogo);
 })
 
 
@@ -17,26 +19,31 @@ Router.get('/', (req, res) => {
 // obtem uma trefa em especifico = select by id
 Router.get('/:id', (req, res) => {
     const idParam = req.params.id;
-    const tarefa = listaDeTarefas.find((elementoDaLista) => elementoDaLista.id == idParam);
-    res.send(tarefa);
+    const produtoDoCatalogo = catalogo.find((elementoDaLista) => elementoDaLista.id == idParam);
+    res.send(produtoDoCatalogo);
 });
 
 
 
 // inserir dados = insert into 
 Router.post('/inserir', (req, res) => {
-    const tarefa = req.body;
+    const produtoInserido = req.body;
 
-    const novaTarefa = {
-        "id": crypto.randomUUID(),
-        ...tarefa // espalhar todas as propriedades do corpo da requisição
+    var numeroDeProdutos = catalogo.length
+    var contadorDeProdutos = numeroDeProdutos+=1; 
+
+    const novoProduto = {
+        "id": contadorDeProdutos,
+        ...produtoInserido // espalhar todas as propriedades do corpo da requisição
     }
 
-    !tarefa || !tarefa.prazo || !tarefa.nome ? res.status(400).send('faltam dados da tarefa') : res.send('tarefa registrada com sucesso')
+    !novoProduto || !novoProduto.categoria || !novoProduto.nome || 
+    !novoProduto.preco || !novoProduto.quantidade ? 
+    res.status(400).send('faltam dados do produto ') : res.send('produto registrado com sucesso')
 
-    listaDeTarefas.push(novaTarefa);
+    catalogo.push(novoProduto);
 
-    res.send('tarefa adicionada à lista');
+    res.send('produto adicionado ao catalogo ');
 });
 
 
@@ -44,11 +51,11 @@ Router.post('/inserir', (req, res) => {
 // deletar tarefa pelo id = delete by id
 Router.delete("/deletar/:id", (req, res) => {
     const idParam = req.params.id;
-    const index = listaDeTarefas.findIndex(tarefa => tarefa.id == idParam)
+    const index = catalogo.findIndex(produto => produto.id == idParam)
 
-    listaDeTarefas.splice(index, 1)
+    catalogo.splice(index, 1)
 
-    res.send(`A tarefa com ID ${idParam} foi removida`)
+    res.send(`O produto com ID ${idParam} foi removido`)
 })
 
 
@@ -61,10 +68,10 @@ Router.put('/editar/:id', (req, res) => {
         ...req.body
     };
 
-    const indice = listaDeTarefas.findIndex(tarefa => tarefa.id == idParam)
+    const indice = catalogo.findIndex(produto => produto.id == idParam)
 
     indice != -1 ?
-        (listaDeTarefas[indice] = novosDados, res.send("Os dados foram alterados"))
+        (catalogo[indice] = novosDados, res.send("Os dados foram alterados"))
         : res.status(404).send("Não encontrado");
 
 })
