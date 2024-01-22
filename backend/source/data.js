@@ -4,8 +4,8 @@ let catalogo = [
         categoria: 'tecnologia',
         nome: 'mac m1',
         preco: 1300,
-        quantidade: 0
-    },
+        quantidade: 2
+    }
 ]
 
 export { catalogo }; 
