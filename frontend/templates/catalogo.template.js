@@ -1,13 +1,15 @@
 
-const routeApi = 'http://localhost:3000/catalogo';
+const routeApi = "http://localhost:3000/catalogo"
 const main = document.getElementById('main');
 
-const res = fetch(routeApi);
-const apiData = res.json();
 
-const getCategories = (res, apiData) => {
+
+const getCategories = () => {
 
   main.innerHTML = '';
+
+  const res = fetch(routeApi);
+  const apiData = res.json();
 
   console.log(apiData.name);
 
@@ -37,4 +39,6 @@ const getCategories = (res, apiData) => {
   )
 };
 
-export { getCategories } ; 
+getCategories(); 
+
+module.exports = {getCategories}

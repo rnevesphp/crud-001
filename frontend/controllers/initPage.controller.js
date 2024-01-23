@@ -5,7 +5,7 @@ function init() {
     console.log('HOLA')
     const doc = document; 
 
-    new getCategories(); 
+    getCategories(); 
 
     console.log(catalogo); 
 }
@@ -14,4 +14,4 @@ function getLoggins() {
     
 }
 
-export { init , getLoggins }; 
+module.exports = { init , getLoggins }; 
