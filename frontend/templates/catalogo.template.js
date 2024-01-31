@@ -2,9 +2,7 @@
 const routeApi = "http://localhost:3000/catalogo"
 const main = document.getElementById('main');
 
-
-
-const getCategories = () => {
+export const getCategories = () => {
 
   main.innerHTML = '';
 
@@ -40,5 +38,3 @@ const getCategories = () => {
 };
 
 getCategories(); 
-
-module.exports = {getCategories}
